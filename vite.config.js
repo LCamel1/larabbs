@@ -15,5 +15,11 @@ export default defineConfig({
       alias: {
         '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
       }
+    },
+    server: {
+      host: "192.168.10.10",
+      watch: {
+        usePolling: true,
+      }
     }
 });
