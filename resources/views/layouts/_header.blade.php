@@ -25,10 +25,10 @@
 
       <ul class="navbar-nav narbar-right">
         <li class="nav-item">
-         <a class="nav-link" href="#"><i class="fa-solid fa-right-to-bracket"></i> 登录</a>
+         <a class="nav-link" href="{{ route('login') }}"><i class="fa-solid fa-right-to-bracket"></i> 登录</a>
         </li>
         <li class="nav-item">
-         <a class="nav-link" href="#"><i class="fa-solid fa-user-plus"></i> 注册</a>
+         <a class="nav-link" href="{{ route('register') }}"><i class="fa-solid fa-user-plus"></i> 注册</a>
         </li>
       </ul>
 
