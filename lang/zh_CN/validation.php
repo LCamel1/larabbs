@@ -140,6 +140,7 @@ return [
     'uppercase'            => ':Attribute 必须大写',
     'url'                  => ':Attribute 格式不正确。',
     'uuid'                 => ':Attribute 必须是有效的 UUID。',
+    'captcha'              => '请输入正确的 :attribute',
     'attributes'           => [
         'address'                  => '地址',
         'age'                      => '年龄',
@@ -212,5 +213,6 @@ return [
         'updated_at'               => '更新于',
         'username'                 => '用户名',
         'year'                     => '年',
+        'captcha'                  => '验证码',
     ],
 ];

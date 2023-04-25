@@ -140,6 +140,7 @@ return [
     'uppercase'            => 'The :attribute must be uppercase.',
     'url'                  => 'The :attribute format is invalid.',
     'uuid'                 => 'The :attribute must be a valid UUID.',
+    'captcha'              => 'Please enter the correct verification code',
     'attributes'           => [
         'address'                  => 'address',
         'age'                      => 'age',
@@ -212,5 +213,6 @@ return [
         'updated_at'               => 'updated at',
         'username'                 => 'username',
         'year'                     => 'year',
+        'captcha'                  => 'captcha',
     ],
 ];
