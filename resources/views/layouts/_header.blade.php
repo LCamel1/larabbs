@@ -24,12 +24,36 @@
       </ul>
 
       <ul class="navbar-nav narbar-right">
-        <li class="nav-item">
+        @guest
+         <li class="nav-item">
          <a class="nav-link" href="{{ route('login') }}"><i class="fa-solid fa-right-to-bracket"></i> 登录</a>
         </li>
         <li class="nav-item">
          <a class="nav-link" href="{{ route('register') }}"><i class="fa-solid fa-user-plus"></i> 注册</a>
         </li>
+        @else
+         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="{{ Auth::user()->avatar }}" class="img-responsive img-circle" width="20px" height="20px">
+            {{ Auth::user()->name }}
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">个人中心</a></li>
+            <li><a class="dropdown-item" href="#">编辑资料</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <a class="dropdown-item" href="#">
+                <form action="{{ route('logout') }}"  method="post">
+                  {{ csrf_field() }}
+                  <button type="submit" class="btn  btn-danger">退出</button>
+                </form>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+
+        @endguest
       </ul>
 
     </div>
