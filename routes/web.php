@@ -30,7 +30,7 @@ Route::get('password/reset{token}', 'App\Http\Controllers\Auth\ResetPasswordCont
 Route::post('password/reset', 'App\Http\Controllers\Auth\ResetPasswordController@reset')->name('password.update');
 //Email认证相关路由
 Route::get('email/verify', 'App\Http\Controllers\Auth\VerificationController@show')->name('verification.notice');
-Route::get('email/verify/{id}', 'App\Http\Controllers\Auth\VerificationController@verify')->name('verification.verify');
-Route::get('email/resend', 'App\Http\Controllers\Auth\VerificationController@resend')->name('verification.resend');
+Route::get('email/verify/{id}/{hash}', 'App\Http\Controllers\Auth\VerificationController@verify')->name('verification.verify');
+Route::post('email/resend', 'App\Http\Controllers\Auth\VerificationController@resend')->name('verification.resend');
 
 //=====================================================================================

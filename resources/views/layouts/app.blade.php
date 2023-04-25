@@ -17,7 +17,8 @@
       @include('layouts._header')
 
       <div class="container">
-        @include('shared._message')
+
+        @include('shared._messages')
 
         @yield('content')
       </div>
