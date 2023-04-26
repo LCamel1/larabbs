@@ -38,8 +38,8 @@
             {{ Auth::user()->name }}
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">个人中心</a></li>
-            <li><a class="dropdown-item" href="#">编辑资料</a></li>
+            <li><a class="dropdown-item" href="{{ route('users.show', Auth::id()) }}">个人中心</a></li>
+            <li><a class="dropdown-item" href="{{ route('users.edit', Auth::id()) }}">编辑资料</a></li>
             <li><hr class="dropdown-divider"></li>
             <li>
               <a class="dropdown-item" href="#">
