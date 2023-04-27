@@ -7,7 +7,7 @@
     <i class="glyphicon glyphicon-edit"></i> 编辑个人资料
   </div>
   <div class="card-body">
-    <form class="" method="POST" action="{{ route('users.update', $user->id) }}" accept-charset="UTF-8">
+    <form class="" method="POST" action="{{ route('users.update', $user->id) }}" accept-charset="UTF-8" enctype="multipart/form-data">
       <input type="hidden" name="_method" value="PATCH" />
       <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
@@ -26,6 +26,16 @@
       <div class="mb-3">
         <label for="introduction-field">个人简介</label>
         <textarea name="introduction" id="introduction-field" class="form-control" rows="3">{{ old('introduction', $user->introduction) }}</textarea>
+      </div>
+
+
+      <div class="mb-3">
+        <label for="avatar-field">用户头像</label>
+        <input class="form-control" type="file" name="avatar" id="avatar-field"  />
+        @if ($user->avatar)
+        <br/>
+        <img class="thumbnail img-responsive" src="{{ $user->avatar }}" width="200"/>
+        @endif
       </div>
 
       <div class="well well-sm">

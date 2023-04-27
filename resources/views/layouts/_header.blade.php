@@ -34,7 +34,13 @@
         @else
          <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="{{ Auth::user()->avatar }}" class="img-responsive img-circle" width="20px" height="20px">
+
+            @if (Auth::user()->avatar)
+                <img src="{{ Auth::user()->avatar }}" class="img-responsive img-circle" width="20px" height="20px">
+            @else
+                <i class="fas fa-user-astronaut" style="font-size: 1.2rem; color: cornflowerblue;" ></i>
+            @endif
+
             {{ Auth::user()->name }}
           </a>
           <ul class="dropdown-menu">
