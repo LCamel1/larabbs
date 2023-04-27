@@ -7,11 +7,11 @@
     <div class="card">
       <img src="#" class="card-img-top" alt="{{ $user->name }}">
       <div class="card-body">
-       <h5 class="card-title">个人中心</h5>
-       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+       <h5 class="card-title">个人简介</h5>
+       <p class="card-text">{{ $user->introduction }}</p>
        <hr />
        <h5 class="card-title">注册于</h5>
-       <p class="card-text">{{ $user->create_at }}</p>
+       <p class="card-text">{{ $user->created_at_str }}</p>
        <hr />
        <h5 class="card-title">最后活跃时间</h5>
        <p class="card-text">{{ $user->create_at }}</p>
