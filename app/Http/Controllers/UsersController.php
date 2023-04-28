@@ -9,6 +9,12 @@ use App\Handlers\ImageUploadHandler;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        //过滤未登录用户的 edit, update 动作
+        $this->middleware('auth', ['except' => ['show']]);
+    }
+
     /**
      * 个人中心
      */
@@ -25,6 +31,7 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
+        $this->authorize('update', $user);//权限控制：用户只能编辑自己的资料
         return view('users.edit', compact('user'));
     }
 
@@ -33,6 +40,8 @@ class UsersController extends Controller
      */
     public function update(UserRequest $request, User $user, ImageUploadHandler $ImageHandler)
     {
+        $this->authorize('update', $user);//权限控制：用户只能编辑自己的资料
+
         $data = $request->all();
         $update = array();
         $oldAvatar =  public_path().  $user->avatar;
