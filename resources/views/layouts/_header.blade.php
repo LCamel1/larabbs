@@ -36,7 +36,7 @@
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 
             @if (Auth::user()->avatar)
-                <img src="{{ Auth::user()->avatar }}" class="img-responsive img-circle" width="20px" height="20px">
+                <img src="{{ Auth::user()->avatar }}" class="img-responsive img-circle" style="border-radius: 500rem;" width="30px" height="30px">
             @else
                 <i class="fas fa-user-astronaut" style="font-size: 1.2rem; color: cornflowerblue;" ></i>
             @endif
