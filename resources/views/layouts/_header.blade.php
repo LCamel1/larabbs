@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse justify-content-between" id="navbarText">
       <ul class="navbar-nav mr-auto">
        <li class="nav-item">
-        <a class="nav-link {{ empty($category) ? 'active' : '' }}" href="{{ route('topics.list', 'i') }}">话题</a>
+        <a class="nav-link {{ empty($category) ? 'active' : '' }}" href="{{ route('topics.list', ['i']) }}">话题</a>
        </li>
 
        @foreach ($categories as $item)

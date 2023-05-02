@@ -19,23 +19,34 @@ class TopicsController extends Controller
     /**
      * 话题列表页
      */
-	public function list(string $type = 'i', int $id = 0)
+	public function list(Request $request)
 	{
-        $topics = '';
+        $type = $request->get('type', 'i');
+        $id = $request->get('id', 0);
         $category = '';
+        $topics = DB::table('topics')->Join('users', 'topics.user_id', '=', 'users.id')
+                                    ->select('topics.*','users.avatar','users.name as user_name');
         if ($type == 'c' && $id != 0) {
-             $topics = DB::table('topics')->rightJoin('users', 'topics.user_id', '=', 'users.id')
-                          ->select('topics.*','users.avatar','users.name as user_name')
-                          ->where('category_id',$id)
-                          ->paginate();
+             $topics = $topics->where('category_id',$id);
 
             $category = Category::find($id);
         } else {
-             $topics = DB::table('topics')->Join('users', 'topics.user_id', '=', 'users.id')
-                          ->Join('categories', 'topics.category_id', '=', 'categories.id')
-                          ->select('topics.*','users.avatar','users.name as user_name','categories.name as category_name')
-                          ->paginate();
+             $topics = $topics->Join('categories', 'topics.category_id', '=', 'categories.id')
+                              ->addSelect('categories.name as category_name');
         }
+        $order =  $request->get('order', 1);
+        //排序
+        switch ($order) {
+            case 2:
+                $topics = $topics-> orderBy('topics.created_at', 'desc');
+                break;
+            case 1:
+            default:
+                $topics = $topics-> orderBy('topics.updated_at', 'desc');
+                break;
+        }
+
+        $topics = $topics->paginate();
 
 		return view('topics.index', compact('topics', 'category'));
 	}

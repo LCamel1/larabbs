@@ -16,10 +16,10 @@
       <div class="card-header">
        <ul class="nav nav-pills">
         <li class="nav-item">
-          <a class="nav-link" href="#">最后回复</a>
+          <a class="nav-link {{ (Request::get('order')!=2) ? 'active' : ''}} " href="{{ Request::url() }}?order=1">最后回复</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">最新发布</a>
+          <a class="nav-link {{ (Request::get('order')==2) ? 'active' : ''}} " href="{{ Request::url() }}?order=2">最新发布</a>
         </li>
        </ul>
       </div>
@@ -69,7 +69,7 @@
         @endif
 
         {{-- 分页 --}}
-        <div class="mt-5">{{ $topics->links() }}</div>
+        <div class="mt-5">{{ $topics->appends(Request::except('page'))->links() }}</div>
       </div>
     </div>
   </div>
