@@ -13,8 +13,8 @@
     @vite(['resources/js/app.js'])
   </head>
   <body>
-    <div id="app">
-      @include('layouts._header')
+    <div id="app" class="{{ route_class() }}-page">
+      @include('layouts._header', ['categories' => app(\App\Models\Category::class)->categories()])
 
       <div class="container">
 

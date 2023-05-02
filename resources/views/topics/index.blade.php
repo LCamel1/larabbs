@@ -1,61 +1,83 @@
 @extends('layouts.app')
 
+@section('title', empty($category) ? '话题列表' : $category->name)
+
 @section('content')
-<div class="container">
-  <div class="col-md-10 offset-md-1">
+<div class="row mb-5">
+  <div class="col-lg-10 col-md-9 topic-list">
+
+    @if (!empty($category))
+    <div class="alert alert-info" role="alert">
+      {{ $category->name }} ：{{ $category->description }}
+    </div>
+    @endif
+
     <div class="card ">
       <div class="card-header">
-        <h1>
-          Topic
-          <a class="btn btn-success float-xs-right" href="{{ route('topics.create') }}">Create</a>
-        </h1>
+       <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link" href="#">最后回复</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">最新发布</a>
+        </li>
+       </ul>
       </div>
 
       <div class="card-body">
-        @if($topics->count())
-          <table class="table table-sm table-striped">
-            <thead>
-              <tr>
-                <th class="text-xs-center">#</th>
-                <th>Title</th> <th>Content</th> <th>User_id</th> <th>Category_id</th> <th>Reply_count</th> <th>View_count</th> <th>Last_reply_user_id</th> <th>Order</th> <th>Excerpt</th> <th>Slug</th>
-                <th class="text-xs-right">OPTIONS</th>
-              </tr>
-            </thead>
+        {{-- 话题列表 --}}
+        @if (count($topics) > 0)
+            <ul class="list-unstyled">
+              @foreach ($topics as $topic)
+                  <li class="d-flex">
+                    <div class="" style="float:left;">
+                      <a href="{{ route('users.show', [$topic->user_id]) }}">
+                        <img class="media-object img-thumbnail mr-3" style="width: 52px; height: 52px;" src="{{ $topic->avatar }}" title="{{ $topic->user_name }}" />
+                      </a>
+                    </div>
 
-            <tbody>
-              @foreach($topics as $topic)
-              <tr>
-                <td class="text-xs-center"><strong>{{$topic->id}}</strong></td>
+                    <div class="flex-grow-1 ms-2">
+                      <div class="mt-0 mb-1">
+                        <a href="#" title="{{ $topic->title }}">{{ $topic->title }}</a>
+                        <a class="float-end" href="#">
+                          <span class="badge bg-secondary rounded-pill"> {{ $topic->reply_count }} </span>
+                        </a>
+                      </div>
 
-                <td>{{$topic->title}}</td> <td>{{$topic->content}}</td> <td>{{$topic->user_id}}</td> <td>{{$topic->category_id}}</td> <td>{{$topic->reply_count}}</td> <td>{{$topic->view_count}}</td> <td>{{$topic->last_reply_user_id}}</td> <td>{{$topic->order}}</td> <td>{{$topic->excerpt}}</td> <td>{{$topic->slug}}</td>
-
-                <td class="text-xs-right">
-                  <a class="btn btn-sm btn-primary" href="{{ route('topics.show', $topic->id) }}">
-                    V
-                  </a>
-
-                  <a class="btn btn-sm btn-warning" href="{{ route('topics.edit', $topic->id) }}">
-                    E
-                  </a>
-
-                  <form action="{{ route('topics.destroy', $topic->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Delete? Are you sure?');">
-                    {{csrf_field()}}
-                    <input type="hidden" name="_method" value="DELETE">
-
-                    <button type="submit" class="btn btn-sm btn-danger">D </button>
-                  </form>
-                </td>
-              </tr>
+                      <small class="media-body meta text-secondary">
+                        <a class="text-secondary" href="{{ route('topics.list', 'c' ,$topic->category_id)  }}" title="@if (empty($category)){{ $topic->category_name }}@else {{ $category->name }}@endif">
+                          <i class="far fa-folder"></i>
+                          @if (empty($category)){{ $topic->category_name }}@else {{ $category->name }}@endif
+                        </a>
+                        <span> • </span>
+                        <a class="text-secondary" href="{{ route('users.show', [$topic->user_id]) }}" title="{{ $topic->user_name }}">
+                          <i class="far fa-user"></i>{{ $topic->user_name }}
+                        </a>
+                        <span> • </span>
+                        <i class="far fa-clock"></i>
+                        <span class="timeago" title="最后活跃于：{{ $topic->updated_at }}">{{ \Carbon\Carbon::parse($topic->updated_at)->diffForHumans() }}</span>
+                      </small>
+                    </div>
+                  </li>
+                  @if ( ! $loop->last)<!--$foreach 循环中内置了 $loop 变量-->
+                  <hr>
+                  @endif
               @endforeach
-            </tbody>
-          </table>
-          {!! $topics->render() !!}
+            </ul>
         @else
-          <h3 class="text-xs-center alert alert-info">Empty!</h3>
+        <div class="empty-block">暂无数据！！</div>
         @endif
+
+        {{-- 分页 --}}
+        <div class="mt-5">{{ $topics->links() }}</div>
       </div>
     </div>
   </div>
-</div>
 
+  <div class="col-lg-3 col-md-3 sidebar">
+    {{-- @include('topics._sidebar') --}}
+
+  </div>
+
+</div>
 @endsection

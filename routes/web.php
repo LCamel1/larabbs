@@ -37,4 +37,6 @@ Route::post('email/resend', 'App\Http\Controllers\Auth\VerificationController@re
 
 Route::resource('users', 'App\Http\Controllers\UsersController', ['only'=>['show', 'edit', 'update']]);
 
-Route::resource('topics', 'App\Http\Controllers\TopicsController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
+Route::resource('topics', 'App\Http\Controllers\TopicsController', ['only' => ['show', 'create', 'store', 'update', 'edit', 'destroy']]);
+
+Route::get('topics/list/{type}/{id?}', 'App\Http\Controllers\TopicsController@list')->name('topics.list');
