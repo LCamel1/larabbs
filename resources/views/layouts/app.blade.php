@@ -11,6 +11,8 @@
     <title>@yield('title', "Larabbs")</title>
 
     @vite(['resources/js/app.js'])
+
+  @yield('styles')
   </head>
   <body>
     <div id="app" class="{{ route_class() }}-page">
@@ -25,5 +27,7 @@
 
        @include('layouts._footer')
     </div>
+
+    @yield('scripts')
   </body>
 </html>

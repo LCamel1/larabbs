@@ -34,7 +34,24 @@
     <hr />
     <div class="card">
       <div class="card-body">
-        暂无数据！
+
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link bg-transparent active" href="{{ route('users.show', $user->id)}}">Ta的话题</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link bg-transparent" href="{{ route('users.show', [$user->id, 'tab'=>'replies'])}}">Ta的回复</a>
+          </li>
+        </ul>
+
+        @if (Request::get('tab')=='replies')
+            @include('users._replies')
+        @else
+            @include('users._topics', [
+              'topics' => $user->topics()->recent()->paginate(5)
+            ])
+        @endif
+
       </div>
     </div>
 

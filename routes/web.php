@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'App\Http\Controllers\StaticPagesController@home')->name('home');
+Route::get('/', 'App\Http\Controllers\TopicsController@index')->name('home');
 
 //Auth::routes(); //等同于下面
 //用户身份验证相关路由
@@ -39,4 +39,6 @@ Route::resource('users', 'App\Http\Controllers\UsersController', ['only'=>['show
 
 Route::resource('topics', 'App\Http\Controllers\TopicsController', ['only' => ['show', 'create', 'store', 'update', 'edit', 'destroy']]);
 
-Route::get('topics/list/{type}/{id?}', 'App\Http\Controllers\TopicsController@list')->name('topics.list');
+Route::get('topics/list/{type}/{id?}', 'App\Http\Controllers\TopicsController@index')->name('topics.list');
+
+Route::post('upload_image', 'TopicsController@uploadImage')->name('topics.upload_image');

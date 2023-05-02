@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', empty($category) ? '话题列表' : $category->name)
+@section('title', empty($category) ? env('APP_NAME') : $category->name)
 
 @section('content')
 <div class="row mb-5">
-  <div class="col-lg-10 col-md-9 topic-list">
+  <div class="col-lg-9 col-md-9 topic-list">
 
     @if (!empty($category))
     <div class="alert alert-info" role="alert">
@@ -38,8 +38,8 @@
 
                     <div class="flex-grow-1 ms-2">
                       <div class="mt-0 mb-1">
-                        <a href="#" title="{{ $topic->title }}">{{ $topic->title }}</a>
-                        <a class="float-end" href="#">
+                        <a href="{{ route('topics.show', $topic->id) }}" title="{{ $topic->title }}">{{ $topic->title }}</a>
+                        <a class="float-end" href="{{ route('topics.show', $topic->id) }}">
                           <span class="badge bg-secondary rounded-pill"> {{ $topic->reply_count }} </span>
                         </a>
                       </div>
@@ -74,10 +74,18 @@
     </div>
   </div>
 
+  {{-- right sidebar --}}
   <div class="col-lg-3 col-md-3 sidebar">
-    {{-- @include('topics._sidebar') --}}
-
+    <div class="card">
+      <div class="card-body">
+        <a href="{{ route('topics.create') }}" class="btn btn-success w-100" aria-label="Left Align">
+          <i class="fas fa-pencil-alt mr-2"></i> 新建帖子
+        </a>
+      </div>
+    </div>
   </div>
+
+
 
 </div>
 @endsection
