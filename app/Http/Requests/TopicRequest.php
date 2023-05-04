@@ -20,8 +20,10 @@ class TopicRequest extends Request
             case 'PATCH':
             {
                 return [
-                    // UPDATE ROLES
-                ];
+                    'title'       => 'required|min:2',
+                    'content'        => 'required|min:3|max:1024',
+                    'category_id' => 'required|numeric',
+                   ];
             }
             case 'GET':
             case 'DELETE':
@@ -34,8 +36,11 @@ class TopicRequest extends Request
 
     public function messages()
     {
-        return [
-            // Validation messages
+         return [
+            'title.min' => '标题必须至少两个字符',
+            'content.min' => '文章内容必须至少三个字符',
+            // 'content.mimes' =>'上传文件必须是 png, jpg, gif, jpeg 的格式',
+            'content.max' =>'上传的文件大小不超过1024KB',
         ];
     }
 }

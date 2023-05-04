@@ -12,7 +12,7 @@
 
     @vite(['resources/js/app.js'])
 
-  @yield('styles')
+    @yield('styles')
   </head>
   <body>
     <div id="app" class="{{ route_class() }}-page">

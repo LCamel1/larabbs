@@ -41,4 +41,4 @@ Route::resource('topics', 'App\Http\Controllers\TopicsController', ['only' => ['
 
 Route::get('topics/list/{type}/{id?}', 'App\Http\Controllers\TopicsController@index')->name('topics.list');
 
-Route::post('upload_image', 'TopicsController@uploadImage')->name('topics.upload_image');
+Route::post('upload_image', 'App\Http\Controllers\TopicsController@uploadImage')->name('topics.upload_image');

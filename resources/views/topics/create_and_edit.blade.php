@@ -45,13 +45,19 @@
           </div>
 
           <div class="mb-3">
-            <textarea name="content" class="form-control" id="editor" rows="6" placeholder="请填入至少三个字符的内容。" autofocus
-              required>{{ old('content', $topic->content) }}</textarea>
+            <textarea name="content" style="display:none;" class="form-control" id="editor" rows="6" placeholder="请填入内容。" autofocus
+              required readonly></textarea>
+          </div>
+
+          <div class="mb-3" id="editor—wrapper">
+            <div id="toolbar-container"><!-- 工具栏 --></div>
+            <div id="editor-container"><!-- 编辑器 --></div>
           </div>
 
           <div class="well well-sm">
             <button type="submit" class="btn btn-primary"><i class="far fa-save mr-2" aria-hidden="true"></i> 保存</button>
           </div>
+
           </form>
         </div>
       </div>
@@ -60,30 +66,87 @@
 @endsection
 
 @section('styles')
-  <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/editor/css/simditor.css') }}">
+    <link href="{{ asset('wangeditor/style.css') }}" rel="stylesheet">
+    <style>
+  #editor—wrapper {
+    border: 1px solid #ccc;
+    z-index: 100; /* 按需定义 */
+  }
+  #toolbar-container { border-bottom: 1px solid #ccc; }
+  #editor-container { height: 500px; }
+</style>
 @endsection
 
 @section('scripts')
-  <script type="text/javascript" src="{{ Vite::asset('resources/editor/js/jquery.min.js') }}"></script>
-  <script type="text/javascript" src="{{ Vite::asset('resources/editor/js/module.min.js') }}"></script>
-  <script type="text/javascript" src="{{ Vite::asset('resources/editor/js/hotkeys.min.js') }}"></script>
-  <script type="text/javascript" src="{{ Vite::asset('resources/editor/js/uploader.min.js') }}"></script>
-  <script type="text/javascript" src="{{ Vite::asset('resources/editor/js/simditor.min.js') }}"></script>
-  <script>
-    $(document).ready(function() {
-      var editor = new Simditor({
-        textarea: $('#editor'),
-        upload: {
-          url: "{{ route('topics.upload_image') }}",
-          params: {
-            _token: '{{ csrf_token() }}'
-          },
-          fileKey: 'topic_upload_image',
-          connectionCount: 3,
-          leaveConfirm: '文件上传中，关闭此页面将取消上传。'
-        },
-        pasteImage: true,
-      });
-    });
-  </script>
+
+<script src="{{ asset('wangeditor/index.js') }}"></script>
+<script type="text/javascript">
+
+const { createEditor, createToolbar } = window.wangEditor
+
+const editorConfig = {
+    placeholder: '请填入内容',
+    onChange(editor) {
+      const html = editor.getHtml()
+      const text = editor.getText()
+      // console.log('editor html', html)
+      // console.log('editor text', text)
+      // 也可以同步到 <textarea>
+
+      //空|空格|换行
+      if(text.match(/^\s*$/)){
+          document.getElementById('editor').value=''
+        } else {
+          document.getElementById('editor').value=html
+        }
+    },
+     MENU_CONF: {}
+}
+editorConfig.MENU_CONF['uploadImage'] = {
+    server: "{{ route('topics.upload_image') }}",
+    fieldName: 'topic_upload_image',
+    allowedFileTypes: ['image/*'],
+    meta: {
+      _token: '{{ csrf_token() }}',
+    },
+    maxNumberOfFiles: 2,
+    onSuccess(file, res) {
+        console.log(`${file.name} 上传成功`, res)
+    },
+    // 上传错误，或者触发 timeout 超时
+    onError(file, err, res) {
+        console.log(`${file.name} 上传出错`, err, res)
+    },
+    // 小于该值就插入 base64 格式（而不上传），默认为 0
+    base64LimitSize: 1 * 1024 // 1kb
+}
+
+const localhtml = escape2Html("{{ old('content', $topic->content) }}")
+
+const editor = createEditor({
+    selector: '#editor-container',
+    html: localhtml,
+    config: editorConfig,
+    mode: 'simple', // 'defalut' or 'simple'
+})
+
+const toolbarConfig = {}
+
+const toolbar = createToolbar({
+    editor,
+    selector: '#toolbar-container',
+    config: toolbarConfig,
+    mode: 'simple', // ’default‘or 'simple'
+})
+
+
+
+//转意符换成普通字符
+function escape2Html(str) {
+  var arrEntities={'lt':'<','gt':'>','nbsp':' ','amp':'&','quot':'"'};
+  return str.replace(/&(lt|gt|nbsp|amp|quot);/ig, function(all,t){
+    return arrEntities[t];
+  });
+}
+</script>
 @endsection
