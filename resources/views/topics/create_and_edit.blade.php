@@ -44,12 +44,8 @@
             </select>
           </div>
 
-          <div class="mb-3">
-            <textarea name="content" style="display:none;" class="form-control" id="editor" rows="6" placeholder="请填入内容。" autofocus
-              required readonly></textarea>
-          </div>
-
           <div class="mb-3" id="editor—wrapper">
+            <input name="content" type="hidden" class="form-control" id="editor" required >
             <div id="toolbar-container"><!-- 工具栏 --></div>
             <div id="editor-container"><!-- 编辑器 --></div>
           </div>
@@ -121,7 +117,7 @@ editorConfig.MENU_CONF['uploadImage'] = {
     base64LimitSize: 1 * 1024 // 1kb
 }
 
-const localhtml = escape2Html("{{ old('content', $topic->content) }}")
+const localhtml = escape2Html('{{ old("content", $topic->content) }}')
 
 const editor = createEditor({
     selector: '#editor-container',

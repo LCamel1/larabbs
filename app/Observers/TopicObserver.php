@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+
 use App\Models\Topic;
 
 // creating, created, updating, updated, saving,
@@ -9,9 +10,12 @@ use App\Models\Topic;
 
 class TopicObserver
 {
-    public function creating(Topic $topic)
+    public function saving(Topic $topic)
     {
-        //
+        //XSS 过滤
+        $topic->content = clean($topic->content, 'user_topic_body');
+
+        $topic->excerpt = make_excerpt($topic->content);
     }
 
     public function updating(Topic $topic)
