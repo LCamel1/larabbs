@@ -56,8 +56,12 @@ class TopicsController extends Controller
     /**
      * 单个话题查看页
      */
-    public function show(Topic $topic)
+    public function show(Request $request, Topic $topic)
     {
+        //防止用户恶意输入
+        if (!empty($topic->slug) && $topic->slug != $request->slug) {
+            return redirect($topic->link(), 301);//301 永久重定向到正确的 URL 上
+        }
         return view('topics.show', compact('topic'));
     }
 

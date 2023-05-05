@@ -20,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Paginator::useBootstrapFour();
+        Paginator::useBootstrapFour(); //分页使用bootstrap的
+
+        //注册观察类 Observe
+        \App\Models\Topic::observe(\App\Observers\TopicObserver::class);
     }
 }

@@ -7,7 +7,8 @@ function route_class()
     return str_replace('.', '-', Route::currentRouteName());
 }
 
-function route_name()
+function make_excerpt($value, $length = 200)
 {
-    Route::currentRouteName();
+    $excerpt = trim(preg_replace('/\r\n|\r|\n+/', ' ', strip_tags($value)));
+    return str()->limit($excerpt, $length);
 }

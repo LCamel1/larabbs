@@ -25,4 +25,12 @@ class Topic extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    /**
+     * show 用上友好URL
+     */
+    public function link($params = [])
+    {
+        return route('topics.show', array_merge([$this->id, $this->slug], $params));
+    }
 }
