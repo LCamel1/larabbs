@@ -45,10 +45,10 @@
         </ul>
 
         @if (Request::get('tab')=='replies')
-            @include('users._replies')
+            @include('users._replies',['replies' => $user->replies()->with('topic')->paginate(5)])
         @else
             @include('users._topics', [
-              'topics' => $user->topics()->recent()->paginate(5)
+              'topics' => $user->topics()->paginate(5)
             ])
         @endif
 

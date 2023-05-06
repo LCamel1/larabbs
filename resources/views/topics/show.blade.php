@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', $topic->title)
+@section('description', $topic->excerpt)
 
 @section('content')
 <div class="row">
@@ -36,7 +37,7 @@
             <i class="far fa-comment"></i> {{ $topic->reply_count }}
         </div>
 
-        <div class="topic-body mt-4 mb-4">
+        <div class="topic-content mt-4 mb-4">
             {!! $topic->content !!}
         </div>
 
@@ -60,6 +61,20 @@
 
       </div>
     </div>
+
+
+
+  {{-- 该话题下的评论/回复列表 --}}
+  <div class="card topic-reply mt-4">
+     <div class="card-body">
+      {{-- 登录用户才能看见评论/回复框 --}}
+      @includeWhen(Auth::check(), 'topics._reply_box', ['topic'=>$topic])
+
+      {{-- 评论列表 --}}
+      @include('topics._reply_list', ['replies' => $topic->replies()->with('user')->paginate(5)])
+    </div>
+  </div>
+
   </div>
 </div>
 @endsection

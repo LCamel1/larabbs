@@ -112,15 +112,8 @@ body {
   margin-bottom: 100px;
 }
 
-.simditor-body img {
-  max-width: 100%;
-}
-
-
 /* Topic Show Page */
-
-.simditor-body,
-.topic-body {
+.topic-content {
   font-size: 15px;
   line-height: 1.3;
   overflow: hidden;
@@ -238,11 +231,11 @@ body {
     overflow: auto;
   }
 
-  .topic-body>*:first-child {
+  .topic-content>*:first-child {
     margin-top: 0 !important;
   }
 
-  .topic-body>*:last-child {
+  .topic-content>*:last-child {
     margin-bottom: 0 !important;
   }
 

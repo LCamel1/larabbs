@@ -44,3 +44,7 @@ Route::get('topics/list/{type}/{id?}', 'App\Http\Controllers\TopicsController@in
 Route::post('upload_image', 'App\Http\Controllers\TopicsController@uploadImage')->name('topics.upload_image');
 
 Route::get('topics/{topic}/{slug?}', 'App\Http\Controllers\TopicsController@show')->name('topics.show');
+
+//回复
+Route::resource('replies', 'App\Http\Controllers\RepliesController', ['only' => ['store', 'destroy']]);
+

@@ -10,6 +10,9 @@
 
     <title>@yield('title', "Larabbs")</title>
 
+    <meta name="description" content="@yield('description')" />
+    <meta name="keywords" content="@yield('keyword')" />
+
     @vite(['resources/js/app.js'])
 
     @yield('styles')

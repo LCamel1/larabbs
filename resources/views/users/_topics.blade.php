@@ -19,5 +19,5 @@
 
 {{-- 分页 --}}
 <div class="mt-4 pt-1">
-  {!! $topics->render() !!}
+  {{ $topics->appends(Request::except('page'))->links() }}
 </div>

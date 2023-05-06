@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrapFour(); //分页使用bootstrap的
 
-        //注册观察类 Observe
+        //注册观察类 Observe（话题的监控类）
         \App\Models\Topic::observe(\App\Observers\TopicObserver::class);
     }
 }
