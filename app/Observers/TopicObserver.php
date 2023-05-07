@@ -20,7 +20,7 @@ class TopicObserver
     public function saving(Topic $topic)
     {
         //XSS 过滤
-        $topic->content = clean($topic->content, 'user_topic_body');
+        $topic->content = clean($topic->content, 'bbs_topic_reply');
         //生成话题摘录
         $topic->excerpt = make_excerpt($topic->content);
 

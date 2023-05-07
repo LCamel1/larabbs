@@ -24,5 +24,6 @@ class AppServiceProvider extends ServiceProvider
 
         //注册观察类 Observe（话题的监控类）
         \App\Models\Topic::observe(\App\Observers\TopicObserver::class);
+        \App\Models\Reply::observe(\App\Observers\ReplyObserver::class);
     }
 }

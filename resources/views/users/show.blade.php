@@ -37,10 +37,10 @@
 
         <ul class="nav nav-tabs">
           <li class="nav-item">
-            <a class="nav-link bg-transparent active" href="{{ route('users.show', $user->id)}}">Ta的话题</a>
+            <a class="nav-link bg-transparent @if (Request::get('tab')!='replies') active @endif " href="{{ route('users.show', $user->id)}}">Ta的话题</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link bg-transparent" href="{{ route('users.show', [$user->id, 'tab'=>'replies'])}}">Ta的回复</a>
+            <a class="nav-link bg-transparent @if (Request::get('tab')=='replies') active @endif " href="{{ route('users.show', [$user->id, 'tab'=>'replies'])}}">Ta的回复</a>
           </li>
         </ul>
 

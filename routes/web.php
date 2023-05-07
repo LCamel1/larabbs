@@ -48,3 +48,5 @@ Route::get('topics/{topic}/{slug?}', 'App\Http\Controllers\TopicsController@show
 //回复
 Route::resource('replies', 'App\Http\Controllers\RepliesController', ['only' => ['store', 'destroy']]);
 
+//消息通知查看页面
+Route::resource('notifications', 'App\Http\Controllers\NotificationsController', ['only' => ['index']]);

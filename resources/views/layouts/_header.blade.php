@@ -28,6 +28,18 @@
          <a class="nav-link" href="{{ route('register') }}"><i class="fa-solid fa-user-plus"></i> 注册</a>
         </li>
         @else
+        <li class="nav-item">
+          <a class="nav-link mt-1 mr-3" href="{{ route('topics.create')}}">
+            <i class="fa-solid fa-plus"></i>
+          </a>
+        </li>
+
+        <li class="nav-item notification-badge">
+          <a class="nav-link ms-3 me-3 badge bg-secondary rounded-pill badge-{{ (Auth::user()->notification_count > 0) ? 'hint' : 'secondary' }}  text-white" href="{{ route('notifications.index') }}">
+            {{ Auth::user()->notification_count }}
+          </a>
+        </li>
+
          <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 
