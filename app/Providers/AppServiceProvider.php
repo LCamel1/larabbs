@@ -12,7 +12,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // app()->isLocal()是 .env 中的 APP_ENV=local ,
+        //这个函数就是说：当项目处于本地开发环境下的时候，注册 sudosu 插件提供的服务,
+        //即只有本地开发环境才能使用SudoSu
+        if (app()->isLocal()) {
+            $this->app->register(\VIACreative\SudoSu\ServiceProvider::class);
+        }
     }
 
     /**

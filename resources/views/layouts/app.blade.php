@@ -31,6 +31,11 @@
        @include('layouts._footer')
     </div>
 
+    {{-- 测试环境下可以用sudosu --}}
+    @if (app()->isLocal())
+        @include('sudosu::user-selector')
+    @endif
+
     @yield('scripts')
   </body>
 </html>

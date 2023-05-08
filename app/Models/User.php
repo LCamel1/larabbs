@@ -11,8 +11,12 @@ use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
 
 use Illuminate\Support\Facades\Auth;
 
+use Spatie\Permission\Traits\HasRoles;
+
 class User extends Authenticatable implements MustVerifyEmail
 {
+    use HasRoles;
+
     use HasApiTokens, HasFactory, Notifiable;
     use MustVerifyEmailTrait;
 
