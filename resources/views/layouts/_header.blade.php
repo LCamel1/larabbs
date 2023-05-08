@@ -52,6 +52,13 @@
             {{ Auth::user()->name }}
           </a>
           <ul class="dropdown-menu">
+             @can('manage_contents')
+                <li><a class="dropdown-item" href="{{ url(config('administrator.uri')) }}">
+                  <i class="fas fa-tachometer-alt mr-2"></i>
+                  管理后台
+                </a></li>
+                <hr class="dropdown-divider">
+              @endcan
             <li><a class="dropdown-item" href="{{ route('users.show', Auth::id()) }}">个人中心</a></li>
             <li><a class="dropdown-item" href="{{ route('users.edit', Auth::id()) }}">编辑资料</a></li>
             <li><hr class="dropdown-divider"></li>
