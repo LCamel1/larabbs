@@ -45,9 +45,9 @@
         </ul>
 
         @if (Request::get('tab')=='replies')
-            @include('users._replies',['replies' => $user->replies()->with('topic')->paginate(5)])
+            @include('users._replies', ['replies' => $user->replies()->with('topic')->paginate(5)])
         @else
-            @include('users._topics', [
+            @include('users._topics',  [
               'topics' => $user->topics()->paginate(5)
             ])
         @endif
