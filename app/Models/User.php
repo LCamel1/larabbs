@@ -13,8 +13,11 @@ use Illuminate\Support\Facades\Auth;
 
 use Spatie\Permission\Traits\HasRoles;
 
+use Traits\ActiveUserHelper;
+
 class User extends Authenticatable implements MustVerifyEmail
 {
+    use Traits\ActiveUserHelper;
     use HasRoles;
 
     use HasApiTokens, HasFactory, Notifiable;

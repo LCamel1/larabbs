@@ -21,6 +21,6 @@ class StaticPagesController extends Controller
             return redirect(url(config('administrator.uri')), 302);
         }
         // 否则使用视图
-        return view('pages.permission_denied');
+        return view('static_pages/permission_denied');
     }
 }

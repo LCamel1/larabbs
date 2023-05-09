@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Category;
 use App\Handlers\ImageUploadHandler;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Link;
 
 class TopicsController extends Controller
 {
@@ -21,7 +23,7 @@ class TopicsController extends Controller
     /**
      * 话题列表页
      */
-	public function index(Request $request)
+	public function index(Request $request, User $user, Link $link)
 	{
         $type = $request->type;
         $id = $request->id;
@@ -50,7 +52,10 @@ class TopicsController extends Controller
 
         $topics = $topics->paginate();
 
-		return view('topics.index', compact('topics', 'category'));
+        $active_users = $user->getActiveUsers();
+        $links = $link->getAllCached();
+
+        return view('topics.index', compact('topics', 'active_users', 'links'));
 	}
 
     /**
