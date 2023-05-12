@@ -197,6 +197,8 @@ return [
 
         Frozennode\Administrator\AdministratorServiceProvider::class,
 
+        App\Providers\EasySmsServiceProvider::class,
+
     ],
 
     /*

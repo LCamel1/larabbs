@@ -2,7 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\SmsVerificationCodesController;
 
+use Overtrue\EasySms\EasySms;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::post("/test", function(){
+    //  $expiredAt = now()->addMinutes(5);
+    //  return $expiredAt->toDateTimeString();
+
 });
+
+
+
+
+// 短信验证码认证
+Route::post('SmsVerificationCodes/store', 'App\Http\Controllers\Api\SmsVerificationCodesController@store')->name('SmsVerificationCodes.store');

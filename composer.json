@@ -15,7 +15,9 @@
         "laravel/tinker": "^2.8",
         "mews/captcha": "^3.3",
         "mews/purifier": "^3.4",
+        "overtrue/easy-sms": "^2.4",
         "overtrue/pinyin": "^5.1",
+        "php-open-source-saver/jwt-auth": "^2.1",
         "predis/predis": "^2.1",
         "spatie/laravel-permission": "^5.10",
         "viacreative/sudo-su": "^1.1"
