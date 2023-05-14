@@ -25,4 +25,9 @@ class SmsVerificationCodeRequest extends FormRequest
             //
         ];
     }
+
+    public function messages()
+    {
+
+    }
 }

@@ -1,10 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\SmsVerificationCodesController;
 
-use Overtrue\EasySms\EasySms;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,15 +16,21 @@ use Overtrue\EasySms\EasySms;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+Route::prefix('v1')->group(function(){
 
-Route::post("/test", function(){
-    //  $expiredAt = now()->addMinutes(5);
-    //  return $expiredAt->toDateTimeString();
+    //通过中间件加上登录频率限制，防止攻击throttle:10,1
+    Route::middleware('throttle:'. config('api.rate_limits.sign'))->group(function(){
+        // 短信验证码认证
+        Route::post('verificationCodes/store', 'App\Http\Controllers\Api\SmsVerificationCodesController@store')->name('verification_codes.store');
+        //用户注册
+        Route::post('users', 'App\Http\Controllers\Api\UsersController@store');
+    });
 
 });
 
 
 
 
-// 短信验证码认证
-Route::post('SmsVerificationCodes/store', 'App\Http\Controllers\Api\SmsVerificationCodesController@store')->name('SmsVerificationCodes.store');
+
+
+
