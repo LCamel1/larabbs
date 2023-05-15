@@ -25,7 +25,6 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
-        var_dump($this->method());
         switch ($this->method()) {
             case 'POST':
                 return [

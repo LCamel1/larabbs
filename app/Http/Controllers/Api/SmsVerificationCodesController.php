@@ -12,12 +12,27 @@ use App\Http\Requests\Api\SmsVerificationCodeRequest;
 class SmsVerificationCodesController extends Controller
 {
 
-    public function store(Request $request)
+    public function store(SmsVerificationCodeRequest $request)
     {
-        //验证传参合法性 => SmsVerificationCodeRequest
+        //1.先判断图片验证码是否正确
+        $captchaData = \Cache::get($request->captcha_key);
+        if (!$captchaData) {
+            abort(403, '图片验证码已失效');
+        }
+
+        // 调用captcha_api_check() 判断用户输入的验证码是否和缓存key中的一样
+        //captcha_api_check()是[mews/captcha] 提供的辅助方法
+        if (!captcha_api_check($request->captcha_code, $captchaData['captcha'], 'flat')) {
+            //图片验证码错误，清除缓存
+            \Cache::forget($request->captcha_key);
+            throw new AuthenticationException('验证码错误');
+        }
+
+        //2.生成手机验证码，并发送短信至用户手机号码上
+        $mobile = $captchaData['phone'];
 
         $easySms = new EasySms(config('easysms'));
-        $mobile = trim($request->phone);
+
         //验证码生成
         $code = str_pad(random_int(1, 9999), 4, 0, STR_PAD_LEFT);
 

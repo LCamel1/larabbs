@@ -2,18 +2,8 @@
 
 namespace App\Http\Requests\Api;
 
-use Illuminate\Foundation\Http\FormRequest;
-
 class SmsVerificationCodeRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -22,12 +12,16 @@ class SmsVerificationCodeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'captcha_key' => 'required|string',
+            'captcha_code' => 'required|string',
         ];
     }
 
     public function messages()
     {
-
+        return [
+            'captcha_key.required' => '图片验证码 key 不能为空',
+            'captcha_code.required' => '图片验证码不能为空',
+        ];
     }
 }

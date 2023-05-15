@@ -20,8 +20,10 @@ Route::prefix('v1')->group(function(){
 
     //通过中间件加上登录频率限制，防止攻击throttle:10,1
     Route::middleware('throttle:'. config('api.rate_limits.sign'))->group(function(){
+        //生成图片验证码
+        Route::post('captchas', 'App\Http\Controllers\Api\captchasController@store');
         // 短信验证码认证
-        Route::post('verificationCodes/store', 'App\Http\Controllers\Api\SmsVerificationCodesController@store')->name('verification_codes.store');
+        Route::post('verification_codes', 'App\Http\Controllers\Api\SmsVerificationCodesController@store');
         //用户注册
         Route::post('users', 'App\Http\Controllers\Api\UsersController@store');
     });

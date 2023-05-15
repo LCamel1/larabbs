@@ -21,13 +21,13 @@ class UsersController extends Controller
         $verifyData = \Cache::get($request->verification_key);
         //判断短信验证码是否已失效
         if (!$verifyData) {
-            abort(403, ' 验证码已失效');
+            abort(403, ' 短信验证码已失效');
         }
 
         //判断用户输入的验证码是否正确 (hash_equals() ->比较两个字符串是否相等)
         if (!hash_equals($request->verification_code, $verifyData['code'])) {
             //返回401
-            throw new AuthenticationException('验证码错误');
+            throw new AuthenticationException('短信验证码错误');
         }
         //创建用户
         $user = User::create([
