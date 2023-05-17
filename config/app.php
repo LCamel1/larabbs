@@ -199,7 +199,14 @@ return [
 
         App\Providers\EasySmsServiceProvider::class,
 
-    ],
+    Laravel\Socialite\SocialiteServiceProvider::class,
+     \SocialiteProviders\Manager\ServiceProvider::class,
+],
+
+'aliases' => [
+    'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+],
+
 
     /*
     |--------------------------------------------------------------------------

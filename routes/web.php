@@ -50,5 +50,3 @@ Route::resource('replies', 'App\Http\Controllers\RepliesController', ['only' => 
 
 //消息通知查看页面
 Route::resource('notifications', 'App\Http\Controllers\NotificationsController', ['only' => ['index']]);
-
-Route::get('permission-denied', 'App\Http\Controllers\StaticPagesController@permissionDenied')->name('permission-denied');

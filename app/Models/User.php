@@ -54,8 +54,8 @@ class User extends Authenticatable implements MustVerifyEmail,JWTSubject
         'password',
         'introduction',
         'avatar',
-        //'weixin_openid',
-       // 'weixin_unionid'
+        'weixin_openid',
+        'weixin_unionid'
     ];
 
     /**
@@ -66,8 +66,8 @@ class User extends Authenticatable implements MustVerifyEmail,JWTSubject
     protected $hidden = [
         'password',
         'remember_token',
-        //'weixin_openid',
-        //'weixin_unionid'
+        'weixin_openid',
+        'weixin_unionid'
     ];
 
     /**

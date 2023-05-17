@@ -1,0 +1,32 @@
+[90m= [39m[34;4mSocialiteProviders\Manager\OAuth2\User[39;24m {#7658
+    +[1mid[22m: "[32momGPY6FCgoDyuY1vO_VYNy07M-Sc[39m",
+    +[1mnickname[22m: "[32m桂[39m",
+    +[1mname[22m: [36mnull[39m,
+    +[1memail[22m: [36mnull[39m,
+    +[1mavatar[22m: "[32mhttps://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83epajWYAQTzw7iaIcGHnKfUYWGribS9t5w4ZMfbZJLzf914TCLERzaByPEfBm6IJwQjfZu8Ej6V8W4yA/132[39m",
+    +[1muser[22m: [
+      "[34mopenid[39m" => "[32momGPY6FCgoDyuY1vO_VYNy07M-Sc[39m",
+      "[34mnickname[39m" => "[32m桂[39m",
+      "[34msex[39m" => [35m0[39m,
+      "[34mlanguage[39m" => "",
+      "[34mcity[39m" => "",
+      "[34mprovince[39m" => "",
+      "[34mcountry[39m" => "",
+      "[34mheadimgurl[39m" => "[32mhttps://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83epajWYAQTzw7iaIcGHnKfUYWGribS9t5w4ZMfbZJLzf914TCLERzaByPEfBm6IJwQjfZu8Ej6V8W4yA/132[39m",
+      "[34mprivilege[39m" => [],
+    ],
+    +[1mattributes[22m: [
+      "[34mid[39m" => "[32momGPY6FCgoDyuY1vO_VYNy07M-Sc[39m",
+      "[34munionid[39m" => [36mnull[39m,
+      "[34mnickname[39m" => "[32m桂[39m",
+      "[34mavatar[39m" => "[32mhttps://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83epajWYAQTzw7iaIcGHnKfUYWGribS9t5w4ZMfbZJLzf914TCLERzaByPEfBm6IJwQjfZu8Ej6V8W4yA/132[39m",
+      "[34mname[39m" => [36mnull[39m,
+      "[34memail[39m" => [36mnull[39m,
+    ],
+    +[1mtoken[22m: "[32m68_hpndll-Gu87Pxz0jtt4_Z84GffgOZasguJnvfklWvb1DMd-rUts9GWaLRfHvvhGJkwvuH8nieVWe6ol5-69kAZDyfwE2LkDACzVwQ1yBJWY[39m",
+    +[1mrefreshToken[22m: [36mnull[39m,
+    +[1mexpiresIn[22m: [36mnull[39m,
+    +[1mapprovedScopes[22m: [36mnull[39m,
+    +[1maccessTokenResponseBody[22m: [36mnull[39m,
+  }
+
