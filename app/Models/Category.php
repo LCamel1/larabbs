@@ -9,6 +9,13 @@ class Category extends Model
 {
     use HasFactory;
 
+    public $timestamp = false;
+
+    protected $fillable = [
+        'name',
+        'description'
+    ];
+
     /**
      * 获取所有话题分类，并存入缓存
      */

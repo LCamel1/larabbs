@@ -8,13 +8,14 @@ use Illuminate\Auth\AuthenticationException;
 use App\Http\Requests\Api\AuthorizationRequest;
 use App\Models\User;
 use Illuminate\Support\Arr;
+use App\Http\Requests\Api\SocialAuthorizationRequest;
 
 class AuthorizationsController extends Controller
 {
     /**
      * 第三方登录
      */
-    public function socialStore($type, Request $request)
+    public function socialStore($type, SocialAuthorizationRequest $request)
     {
 
         $driver = \Socialite::driver($type);
@@ -73,7 +74,7 @@ class AuthorizationsController extends Controller
     /**
      * 登录
      */
-    public function store(Request $request)
+    public function store(AuthorizationRequest $request)
     {
         $username = $request->username;
 
@@ -106,14 +107,11 @@ class AuthorizationsController extends Controller
      /**
       * 删除token 退出
       */
-      public function destroy()
-      {
+    public function destroy()
+    {
         auth('api')->logout();
         return response(null, 204);
-      }
-
-
-
+    }
 
 
 

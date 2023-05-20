@@ -40,4 +40,38 @@ class UsersController extends Controller
 
         return (new UserResource($user))->showSensitiveFields();
     }
+
+    /**
+     *  根据ID获取一用户的信息
+     */
+    public function show(User $user, Request $request)
+    {
+        return new UserResourse($user);
+    }
+
+    /**
+     * 获取当前登录用户的信息
+     */
+    public function me(Request $request)
+    {
+        return (new UserResource($request->user()))->showSensitiveFields();
+    }
+    /*
+     * 编辑个人信息
+     */
+    public function update(UserRequest $request)
+    {
+        $user = $request->user();
+        $attributes = $request->only(['name', 'email', 'introduction']);
+
+        if ($request->avatar_image_id) {
+            $image = Image::find($request->avatar_image_id);
+
+            $attributes['avatar'] = $image->path;
+        }
+        $user->update($attributes);
+
+        return (new UserResource($user))->showSensitiveFields();
+    }
+
 }
