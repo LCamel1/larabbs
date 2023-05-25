@@ -93,12 +93,16 @@ Route::prefix('v1')->group(function(){
             Route::apiResource('topics.replies', 'App\Http\Controllers\Api\RepliesController')->only(['store', 'destroy']);
 
             //通知列表（资源）
+            Route::apiResource('notifications', 'App\Http\Controllers\Api\NotificationsController')->only(['index']);
 
             //通知统计
+            Route::get('notifications/stats', 'App\Http\Controllers\Api\NotificationsController@stats');
 
             //标记通知消息已读
+            Route::patch('user/read/notifications', 'App\Http\Controllers\Api\NotificationsController@read');
 
             //当前登录用户权限
+            Route::get('user/permissions', 'App\Http\Controllers\Api\PermissionsController@index');
         });
 
     });
